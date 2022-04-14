@@ -4,7 +4,7 @@ def zero_bin(binary):
     return binary
 
 
-def toBinary(text):
+def to_binary(text):
     ord_list, bin_list = [], []
     for i in text:
         ord_list.append(ord(i))
@@ -13,7 +13,7 @@ def toBinary(text):
     return bin_list
 
 
-def toString(bytes):
+def to_string(bytes):
     binary_int = int(bytes[1:], 2)
     byte_number = binary_int.bit_length() + 7 // 8
     binary_array = binary_int.to_bytes(byte_number, "big")

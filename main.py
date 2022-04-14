@@ -1,8 +1,9 @@
-from binary_operation import toBinary, toString
+from binary_operation import to_binary, to_string
 from hamming_conversion import hamming_decode, hamming_encode
 
 
-def text_2_hamming(bin, parity):
+def text_2_hamming(text, parity):
+    bin = to_binary(text)
     encoded_string = []
     for letter in bin:
         print(f"Binaire à encoder : {parity}{letter}")
@@ -17,7 +18,7 @@ def hamming_2_text(encoded_string):
     for binary in encoded_string:
         decoded_bytes = hamming_decode(binary)
         print(f"Bits decodé aves la methode Hamming : {decoded_bytes}")
-        text_decode = toString(decoded_bytes).replace("\x00", "")
+        text_decode = to_string(decoded_bytes).replace("\x00", "")
         print(f"Binaire décodé : {repr(text_decode)}")
         decoded_string.append(text_decode)
     return decoded_string
@@ -26,8 +27,7 @@ def hamming_2_text(encoded_string):
 def main():
     text = "abc"
     print(f"{'-' * 50}\nTexte a encoder : {repr(text)}\n{'-' * 50}")
-    bin = toBinary(text)
-    encoded_string = text_2_hamming(bin, 1)
+    encoded_string = text_2_hamming(text, 1)
     print(f"{'-' * 50}\nTexte encodé : {encoded_string}\n{'-' * 50}")
     decoded_string = hamming_2_text(encoded_string)
     print(
