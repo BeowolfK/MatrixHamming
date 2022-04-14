@@ -1,6 +1,9 @@
 # Visual Studio json config file
 .vscode/
 
+# Just to never upload note for me
+*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 __pycache__/*
