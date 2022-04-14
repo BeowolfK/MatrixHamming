@@ -13,10 +13,10 @@ class Presentation(object):
 
     def add_rows(self, rows):
         self.rows.append(rows)
-    
+
     def add_footers(self, footer):
         self.footers.append(footer)
-    
+
     def clear_rows(self):
         self.rows = []
 
