@@ -14,7 +14,7 @@ def toBinary(text):
 
 
 def toString(bytes):
-    binary_int = int(bytes, 2)
+    binary_int = int(bytes[1:], 2)
     byte_number = binary_int.bit_length() + 7 // 8
     binary_array = binary_int.to_bytes(byte_number, "big")
     ascii_text = binary_array.decode()
