@@ -1,11 +1,13 @@
 from binary_operation import to_binary, to_string
 from hamming_conversion import hamming_decode, hamming_encode
+# from table import Presentation
 
 
 def text_2_hamming(text, parity):
-    bin = to_binary(text)
     encoded_string = []
-    for letter in bin:
+    bin = to_binary(text)
+    for index, letter in enumerate(bin):
+        print(f"Lettre a encoder : {text[index]}")
         print(f"Binaire à encoder : {parity}{letter}")
         text_encode = hamming_encode(letter, parity)
         print(f"Bits encodé aves la methode Hamming : {text_encode}")
@@ -16,6 +18,7 @@ def text_2_hamming(text, parity):
 def hamming_2_text(encoded_string):
     decoded_string = []
     for binary in encoded_string:
+        print(f"Binaire a decoder : {binary}")
         decoded_bytes = hamming_decode(binary)
         print(f"Bits decodé aves la methode Hamming : {decoded_bytes}")
         text_decode = to_string(decoded_bytes).replace("\x00", "")
@@ -25,16 +28,15 @@ def hamming_2_text(encoded_string):
 
 
 def main():
-    text = "abc"
-    print(f"{'-' * 50}\nTexte a encoder : {repr(text)}\n{'-' * 50}")
-    encoded_string = text_2_hamming(text, 1)
+    TEXT = "abc"
+    print(f"{'-' * 50}\nTexte a encoder : {repr(TEXT)}\n{'-' * 50}")
+    encoded_string = text_2_hamming(TEXT, 1)
     print(f"{'-' * 50}\nTexte encodé : {encoded_string}\n{'-' * 50}")
-    decoded_string = hamming_2_text(encoded_string)
+    decoded_string = repr(''.join(hamming_2_text(encoded_string)))
+    print(f"{'-' * 50}\nTexte decodé : {decoded_string}\n{'-' * 50}")
     print(
-        "{}\nTexte decodé : {}\n{}".format(
-            str('-' * 50),
-            repr(''.join(decoded_string)),
-            str('-' * 50)
+        "Le texte décodé est il identique au texte initial ? {}".format(
+                'Oui' if repr(TEXT) == decoded_string else 'Non'
             )
         )
     input("Prenons le cas de données corrompu : ")
@@ -43,14 +45,8 @@ def main():
     corrupted_data = ["011000001110", "011000010000", "011000010111"]
     print(f"{'-' * 50}\nTexte encodé :\t\t{encoded_string}")
     print(f"Texte encodé corrompu : {corrupted_data}\n{'-' * 50}")
-    decoded_string2 = hamming_2_text(corrupted_data)
-    print(
-        "{}\nTexte decodé : {}\n{}".format(
-            str('-' * 50),
-            repr(''.join(decoded_string2)),
-            str('-' * 50)
-            )
-        )
+    decoded_string2 = repr(''.join(hamming_2_text(corrupted_data)))
+    print(f"{'-' * 50}\nTexte decodé : {decoded_string2}\n{'-' * 50}")
     print(
         "Bytes identiques ? {}".format(
             'Oui' if encoded_string == corrupted_data else 'Non'
